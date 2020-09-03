@@ -27,10 +27,12 @@ class BaseConfiguration(Configuration):
         'django.contrib.staticfiles',
         'rest_framework',
         'corsheaders',
+        'django_filters',
         'utils',
         'solo',
         'django_camunda',
         'auth_',
+        'task'
     ]
 
     MIDDLEWARE = [
@@ -127,6 +129,7 @@ class BaseConfiguration(Configuration):
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.BasicAuthentication',
         ),
+        'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
         'EXCEPTION_HANDLER': 'utils.exceptions.custom_exception_handler',
     }
 
