@@ -28,6 +28,8 @@ class BaseConfiguration(Configuration):
         'rest_framework',
         'corsheaders',
         'utils',
+        'solo',
+        'django_camunda',
         'auth_',
     ]
 
