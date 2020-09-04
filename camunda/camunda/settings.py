@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 from configurations import Configuration
 import datetime
+from datetime import timedelta
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -126,6 +128,7 @@ class BaseConfiguration(Configuration):
             'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.BasicAuthentication',
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
         ),
         'EXCEPTION_HANDLER': 'utils.exceptions.custom_exception_handler',
     }
@@ -133,6 +136,28 @@ class BaseConfiguration(Configuration):
     JWT_AUTH = {
         'JWT_EXPIRATION_DELTA': datetime.timedelta(days=300),
         'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    }
+    SIMPLE_JWT = {
+        'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+        'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+
+        'ALGORITHM': 'HS256',
+        'SIGNING_KEY': SECRET_KEY,
+        'VERIFYING_KEY': None,
+        'AUDIENCE': None,
+        'ISSUER': None,
+
+        'AUTH_HEADER_TYPES': ('Bearer',),
+        'USER_ID_FIELD': 'id',
+        'USER_ID_CLAIM': 'user_id',
+
+        'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+        'TOKEN_TYPE_CLAIM': 'token_type',
+
+        'JTI_CLAIM': 'jti',
+
+        'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+        'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
     }
     CORS_ORIGIN_ALLOW_ALL = True
 
