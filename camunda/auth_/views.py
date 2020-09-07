@@ -1,19 +1,21 @@
-from django.utils import timezone, translation
-from django.utils.translation import gettext, activate
+
+from django.utils.translation import gettext
 from rest_framework import status, generics
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import viewsets
-from django.contrib.auth.mixins import LoginRequiredMixin
-from utils.exceptions import CommonException
 from utils.messages import (PASSWORD_CHANGED,
                             USER_DETAILS_CHANGED,
                             ACCOUNT_EXIST)
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from django.http import HttpResponse
+from utils.exceptions import CommonException
+from django.utils.translation import gettext
+from django.contrib.auth.hashers import make_password
+from utils import messages, codes
 from auth_.token import get_token
 from auth_.models import MainUser
-from auth_.serializers import MainUserSerializer, ChangePasswordSerializer, ChangeDetailsSerializer, RegistrationSerializer
-from utils import messages, codes
+from auth_.serializers import MainUserSerializer, ChangePasswordSerializer, ChangeDetailsSerializer, \
+    RegistrationSerializer, LoginSerializer
 
 USER = 'USER'
 
@@ -35,11 +37,14 @@ class SignUpView(generics.CreateAPIView):
                         status=status.HTTP_200_OK)
 
 
-class LoginView(viewsets.ViewSet):
-    def login(self, request):
+
+
+class LoginView(generics.CreateAPIView):
+    serializer_class = LoginSerializer
+
+    def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
-        print(username, password)
         if username is None or password is None:
             raise CommonException(detail=gettext(messages.NO_CREDENTIALS),
                                   code=codes.NO_CREDENTIALS)
@@ -54,7 +59,7 @@ class LoginView(viewsets.ViewSet):
         token = get_token(user)
         serializer = MainUserSerializer(user)
         return Response({'token': token, 'user': serializer.data},
-                            status=status.HTTP_200_OK)
+                        status=status.HTTP_200_OK)
 
 
 class ChangePassword(generics.UpdateAPIView):
@@ -71,7 +76,7 @@ class ChangePassword(generics.UpdateAPIView):
 
 class ChangeDetails(generics.UpdateAPIView):
     serializer_class = ChangeDetailsSerializer
-
+    queryset = MainUser
 
     def put(self, request):
         serializer = ChangeDetailsSerializer(data=request.data,

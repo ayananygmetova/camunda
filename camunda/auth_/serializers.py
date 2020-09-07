@@ -1,15 +1,23 @@
 from rest_framework import serializers
 
 from auth_.models import MainUser
+from auth_.token import get_token
 from utils.exceptions import CommonException
+from django.utils.translation import gettext
 from django.contrib.auth.hashers import make_password
 from utils import messages, codes
+from rest_framework_jwt.settings import api_settings
 
 
 class MainUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainUser
         fields = '__all__'
+
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
 
 
 class RegistrationSerializer(serializers.Serializer):
@@ -45,9 +53,9 @@ class ChangePasswordSerializer(serializers.Serializer):
 
 
 class ChangeDetailsSerializer(serializers.Serializer):
-    first_name = serializers.CharField(max_length=200)
-    last_name = serializers.CharField(max_length=250)
-    email = serializers.CharField(max_length=100)
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    email = serializers.CharField()
 
     def validate(self, attrs):
         if self.context['request'].user.email != attrs['email']:
@@ -58,7 +66,7 @@ class ChangeDetailsSerializer(serializers.Serializer):
 
     def change_details(self):
         user = self.context['request'].user
-        user.fist_name = self.validated_data['fisrt_name']
+        user.fist_name = self.validated_data['first_name']
         user.last_name = self.validated_data['last_name']
         user.email = self.validated_data['email']
         user.save()

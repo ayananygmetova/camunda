@@ -48,7 +48,7 @@ class MainUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True, verbose_name='Активность')
     is_admin = models.BooleanField(default=False)
     is_manager = models.BooleanField(default=False)
-    is_employee = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     USERNAME_FIELD = 'username'
     objects = MainUserManager()
 
