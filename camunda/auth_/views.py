@@ -38,7 +38,6 @@ class SignUpView(generics.CreateAPIView):
 
 
 
-
 class LoginView(generics.CreateAPIView):
     serializer_class = LoginSerializer
 
@@ -87,3 +86,13 @@ class ChangeDetails(generics.UpdateAPIView):
         return Response((gettext(USER_DETAILS_CHANGED),
                             user.data),
                             status=status.HTTP_200_OK)
+
+    def patch(self, request):
+        serializer = ChangeDetailsSerializer(data=request.data,
+                                             context={'request': self.request})
+        serializer.is_valid(raise_exception=True)
+        serializer.change_details()
+        user = MainUserSerializer(self.request.user)
+        return Response((gettext(USER_DETAILS_CHANGED),
+                         user.data),
+                        status=status.HTTP_200_OK)

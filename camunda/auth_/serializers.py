@@ -66,7 +66,10 @@ class ChangeDetailsSerializer(serializers.Serializer):
 
     def change_details(self):
         user = self.context['request'].user
-        user.fist_name = self.validated_data['first_name']
-        user.last_name = self.validated_data['last_name']
-        user.email = self.validated_data['email']
+        if self.validated_data['first_name'] is not '':
+            user.fist_name = self.validated_data['first_name']
+        if self.validated_data['last_name'] is not '':
+            user.last_name = self.validated_data['last_name']
+        if self.validated_data['email'] is not '':
+            user.email = self.validated_data['email']
         user.save()
