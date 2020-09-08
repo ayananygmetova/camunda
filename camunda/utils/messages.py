@@ -1,5 +1,6 @@
 from camunda import settings
 
+SIGNED_IN = 'Sign in'
 PASSWORD_CHANGED = 'Password changed'
 USER_DETAILS_CHANGED = 'User details changed'
 ACCOUNT_EXIST = 'Account exists'

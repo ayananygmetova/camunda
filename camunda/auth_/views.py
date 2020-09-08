@@ -1,16 +1,15 @@
 
-from django.utils.translation import gettext
 from rest_framework import status, generics
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from utils.messages import (PASSWORD_CHANGED,
                             USER_DETAILS_CHANGED,
                             ACCOUNT_EXIST)
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from django.http import HttpResponse
 from utils.exceptions import CommonException
 from django.utils.translation import gettext
-from django.contrib.auth.hashers import make_password
+from datetime import datetime
+import requests
+import json
 from utils import messages, codes
 from auth_.token import get_token
 from auth_.models import MainUser
@@ -27,28 +26,40 @@ class SignUpView(generics.CreateAPIView):
         return MainUser.objects.get(email=self.request.data.get('email'))
 
     def post(self, request):
-        serializer_class = RegistrationSerializer(data={"username": self.request.data.get('username'),
+        serializer_class = RegistrationSerializer(data={"email": self.request.data.get('email'),
                                                         "password": self.request.data.get('password'),
-                                                        "first_name": self.request.data.get('first_name'),
-                                                        "last_name": self.request.data.get('last_name')})
+                                                        "fio": self.request.data.get('fio')})
         serializer_class.is_valid()
         serializer_class.save()
+        # url = 'http://dev.cheesenology.kz:8080/camunda/app/admin/default/#/user-create'
+        # email = self.request.data.get('username') + "@camunda.org"
+        # data = {
+        #     "profile": {
+        #         "id": "",
+        #         "firstName": self.request.data.get('first_name'),
+        #         "lastName": self.request.data.get('last_name'),
+        #         "email": email,
+        #         "credentials": {
+        #             "password": self.request.data.get('password')
+        #         }
+        #     }
+        # }
+        # requests.post(url, data=json.dumps(data))
         return Response(serializer_class.data,
                         status=status.HTTP_200_OK)
-
 
 
 class LoginView(generics.CreateAPIView):
     serializer_class = LoginSerializer
 
     def post(self, request):
-        username = request.data.get('username')
+        email = request.data.get('email')
         password = request.data.get('password')
-        if username is None or password is None:
+        if email is None or password is None:
             raise CommonException(detail=gettext(messages.NO_CREDENTIALS),
                                   code=codes.NO_CREDENTIALS)
         try:
-            user = MainUser.objects.get(username=username)
+            user = MainUser.objects.get(email=email)
             if not user.check_password(password):
                 raise CommonException(detail=gettext(messages.WRONG_EMAIL_OR_PASSWORD),
                                       code=codes.WRONG_EMAIL_OR_PASSWORD)
@@ -56,10 +67,18 @@ class LoginView(generics.CreateAPIView):
             raise CommonException(detail={gettext(messages.EMAIL_DOESNT_EXIST)},
                                   code=codes.EMAIL_DOESNT_EXIST)
         token = get_token(user)
+        user.last_login = datetime.now()
+        user.save()
         serializer = MainUserSerializer(user)
         return Response({'token': token, 'user': serializer.data},
                         status=status.HTTP_200_OK)
 
+
+class UserInfo(APIView):
+    def get(self, request):
+        user = self.request.user
+        serializer = MainUserSerializer(user)
+        return Response(serializer.data)
 
 class ChangePassword(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer

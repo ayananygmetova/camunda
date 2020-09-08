@@ -1,7 +1,9 @@
 
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser,
                                         PermissionsMixin)
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from datetime import datetime
 
 ADMIN = "ADMIN"
 EMPLOYEE = "EMPLOYEE"
@@ -15,43 +17,35 @@ ROLES = (
 
 
 class MainUserManager(BaseUserManager):
-    def create_user(self, username, password,first_name=None, last_name=None):
-        if not username:
-            raise ValueError('User must have a username')
-        if "@" in username and username[len(username)-1] != "@":
-            email = username
-        else:
-            email = username + "@camunda.org"
+    def create_user(self, email, password, fio=None, phone=None, image_url=None, image_url_orig=None):
+        if not email:
+            raise ValueError('User must have a email')
         email = self.normalize_email(email)
-        user = self.model(username=username, email=email, first_name=first_name,
-                          last_name=last_name, full_name=first_name+" "+last_name)
+        user = self.model(email=email, fio=fio,phone=phone, image_url= image_url, image_url_orig=image_url_orig)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self,username, password):
-        user = self.model(username=username)
-        user.set_password(password)
-        user.is_admin = True
-        user.is_manager = True
-        user.is_staff = True
-        user.role = ADMIN
-        user.save(using=self._db)
-        return user
 
 
 class MainUser(AbstractBaseUser, PermissionsMixin):
-    first_name = models.CharField(max_length=200, blank=True, null=True)
-    last_name = models.CharField(max_length=250, blank=True, null=True)
-    full_name = models.CharField(max_length=500, blank=True, null=True)
-    username = models.CharField(max_length=100, unique=True, db_index=True)
-    email = models.EmailField(max_length=100, unique=True, db_index=True)
-    role = models.CharField(max_length=100, choices=ROLES, default=EMPLOYEE, verbose_name="Роль")
-    timestamp = models.DateField(auto_now=True)
-    is_active = models.BooleanField(default=True, verbose_name='Активность')
-    is_admin = models.BooleanField(default=False)
-    is_manager = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    USERNAME_FIELD = 'username'
+    email = models.EmailField(max_length=100, unique=True, db_index=True, verbose_name='email сотрудника')
+    fio = models.CharField(max_length=100, verbose_name='ФИО сотрудника')
+    is_active = models.IntegerField(default=1, verbose_name='Признак активности. 0 - не активный, 1 - активный. По умолчанию 1')
+    last_login = models.DateTimeField(editable=True, blank=True, null=True, verbose_name='Дата и время последнего входа в систему')
+    rowversion = models.DateField(editable=True, blank=True, null=True, verbose_name='Дата и время изменения')
+    phone = models.CharField(max_length=50, blank=True, null=True, verbose_name='Телефон сотрудника')
+    image_url = models.TextField(blank=True, null=True, verbose_name='Аватарка')
+    image_url_orig = models.TextField(blank=True, null=True, verbose_name='Аватар оригинал')
+    is_show_all_remonts = models.IntegerField(default=0, verbose_name='Показывать вес ремонты для данной должности')
+    is_write_chat_message = models.IntegerField(default=0, verbose_name='Может ли писать в чат (1 - да, 0 - нет')
+    mobile_token_id = models.CharField(max_length=20, blank=True, null=True, verbose_name='Первые 10 символов от mobile')
+    is_kpi = models.IntegerField(default=0, verbose_name='Возможность проставлять KPI')
+    is_only_read = models.IntegerField(default=0, verbose_name='1 - пользователь только для чтения, 0 - обычный наш пользователь')
+    is_subscribe = models.IntegerField(default=0, verbose_name='Подписан ли пользователь на уведомления. 0 - не подписан, 1 - подписан')
+    application_code = models.CharField(max_length=50, blank=True, null=True, verbose_name='На какое приложение отправлять пуш уведомление')
+    guid = models.CharField(max_length=250, blank=True, null=True, verbose_name='ГУИД для хантеров в 1С')
+    auth_token = models.CharField(max_length=500, blank=True, null=True)
+    USERNAME_FIELD = 'email'
     objects = MainUserManager()
 

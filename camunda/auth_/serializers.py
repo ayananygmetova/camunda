@@ -6,31 +6,31 @@ from utils.exceptions import CommonException
 from django.utils.translation import gettext
 from django.contrib.auth.hashers import make_password
 from utils import messages, codes
+
+from datetime import datetime
 from rest_framework_jwt.settings import api_settings
 
 
 class MainUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainUser
-        fields = '__all__'
+        fields = ('email', 'fio', 'phone', 'image_url', 'image_url_orig')
 
 
 class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
+    email = serializers.CharField()
     password = serializers.CharField()
 
 
 class RegistrationSerializer(serializers.Serializer):
-    username = serializers.CharField()
+    email = serializers.CharField()
     password = serializers.CharField()
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
+    fio = serializers.CharField()
 
     def save(self):
-        MainUser.objects.create_user(self.validated_data['username'],
+        MainUser.objects.create_user(self.validated_data['email'],
                                      self.validated_data['password'],
-                                     self.validated_data['first_name'],
-                                     self.validated_data['last_name'])
+                                     self.validated_data['fio'])
 
 
 class ChangePasswordSerializer(serializers.Serializer):
@@ -53,9 +53,9 @@ class ChangePasswordSerializer(serializers.Serializer):
 
 
 class ChangeDetailsSerializer(serializers.Serializer):
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
+    fio = serializers.CharField()
     email = serializers.CharField()
+    phone = serializers.CharField()
 
     def validate(self, attrs):
         if self.context['request'].user.email != attrs['email']:
@@ -66,10 +66,8 @@ class ChangeDetailsSerializer(serializers.Serializer):
 
     def change_details(self):
         user = self.context['request'].user
-        if self.validated_data['first_name'] is not '':
-            user.fist_name = self.validated_data['first_name']
-        if self.validated_data['last_name'] is not '':
-            user.last_name = self.validated_data['last_name']
-        if self.validated_data['email'] is not '':
-            user.email = self.validated_data['email']
+        user.fio = self.validated_data['fio']
+        user.email = self.validated_data['email']
+        user.phone = self.validated_data['phone']
+        user.rowversion = datetime.now()
         user.save()

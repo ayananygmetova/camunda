@@ -132,7 +132,7 @@ class BaseConfiguration(Configuration):
     }
 
     SIMPLE_JWT = {
-        'ACCESS_TOKEN_LIFETIME': timedelta(seconds=300),
+        'ACCESS_TOKEN_LIFETIME': timedelta(seconds=5),
         'REFRESH_TOKEN_LIFETIME': timedelta(seconds=12000),
     }
     CORS_ORIGIN_ALLOW_ALL = True
