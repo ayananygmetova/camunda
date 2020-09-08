@@ -18,7 +18,10 @@ class MainUserManager(BaseUserManager):
     def create_user(self, username, password,first_name=None, last_name=None):
         if not username:
             raise ValueError('User must have a username')
-        email = username + "@camunda.org"
+        if "@" in username and username[len(username)-1] != "@":
+            email = username
+        else:
+            email = username + "@camunda.org"
         email = self.normalize_email(email)
         user = self.model(username=username, email=email, first_name=first_name,
                           last_name=last_name, full_name=first_name+" "+last_name)
