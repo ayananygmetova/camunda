@@ -40,6 +40,7 @@ class BaseConfiguration(Configuration):
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.auth.middleware.RemoteUserMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'corsheaders.middleware.CorsMiddleware',
@@ -66,7 +67,9 @@ class BaseConfiguration(Configuration):
             },
         },
     ]
-
+    AUTHENTICATION_BACKENDS = [
+        'django.contrib.auth.backends.RemoteUserBackend',
+    ]
     WSGI_APPLICATION = 'camunda.wsgi.application'
 
 

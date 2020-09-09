@@ -10,6 +10,7 @@ from django.utils.translation import gettext
 from datetime import datetime
 import requests
 import json
+import random
 from utils import messages, codes
 from auth_.token import get_token
 from auth_.models import MainUser
@@ -31,20 +32,20 @@ class SignUpView(generics.CreateAPIView):
                                                         "fio": self.request.data.get('fio')})
         serializer_class.is_valid()
         serializer_class.save()
-        # url = 'http://dev.cheesenology.kz:8080/camunda/app/admin/default/#/user-create'
-        # email = self.request.data.get('username') + "@camunda.org"
-        # data = {
-        #     "profile": {
-        #         "id": "",
-        #         "firstName": self.request.data.get('first_name'),
-        #         "lastName": self.request.data.get('last_name'),
-        #         "email": email,
-        #         "credentials": {
-        #             "password": self.request.data.get('password')
-        #         }
-        #     }
-        # }
-        # requests.post(url, data=json.dumps(data))
+        url = 'http://dev.cheesenology.kz:8080/engine-rest/user/create'
+        surname, name = (str(self.request.data.get('fio'))+" ").split(" ", 1)
+        json = {
+            "profile": {
+                "id": str(self.request.data.get('email')).partition("@")[0],
+                "firstName": name,
+                "lastName": surname,
+                "email": self.request.data.get('email'),
+                "credentials": {
+                    "password": self.request.data.get('password')
+                }
+            }
+        }
+        requests.post(url, json=json)
         return Response(serializer_class.data,
                         status=status.HTTP_200_OK)
 
@@ -69,6 +70,7 @@ class LoginView(generics.CreateAPIView):
         token = get_token(user)
         user.last_login = datetime.now()
         user.save()
+        url = "http://dev.cheesenology.kz:8080/camunda/app/admin/default/#/login"
         serializer = MainUserSerializer(user)
         return Response({'token': token, 'user': serializer.data},
                         status=status.HTTP_200_OK)
