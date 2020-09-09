@@ -9,6 +9,7 @@ from utils.exceptions import CommonException
 from django.utils.translation import gettext
 from datetime import datetime
 import requests
+from rest_framework.permissions import IsAuthenticated
 import json
 import random
 from utils import messages, codes
@@ -32,20 +33,20 @@ class SignUpView(generics.CreateAPIView):
                                                         "fio": self.request.data.get('fio')})
         serializer_class.is_valid()
         serializer_class.save()
-        url = 'http://dev.cheesenology.kz:8080/engine-rest/user/create'
-        surname, name = (str(self.request.data.get('fio'))+" ").split(" ", 1)
-        json = {
-            "profile": {
-                "id": str(self.request.data.get('email')).partition("@")[0],
-                "firstName": name,
-                "lastName": surname,
-                "email": self.request.data.get('email'),
-                "credentials": {
-                    "password": self.request.data.get('password')
-                }
-            }
-        }
-        requests.post(url, json=json)
+        # url = 'http://dev.cheesenology.kz:8080/engine-rest/user/create'
+        # surname, name = (str(self.request.data.get('fio'))+" ").split(" ", 1)
+        # json = {
+        #     "profile": {
+        #         "id": str(self.request.data.get('email')).partition("@")[0],
+        #         "firstName": name,
+        #         "lastName": surname,
+        #         "email": self.request.data.get('email'),
+        #         "credentials": {
+        #             "password": self.request.data.get('password')
+        #         }
+        #     }
+        # }
+        # requests.post(url, json=json)
         return Response(serializer_class.data,
                         status=status.HTTP_200_OK)
 
@@ -77,6 +78,7 @@ class LoginView(generics.CreateAPIView):
 
 
 class UserInfo(APIView):
+    permission_classes = (IsAuthenticated,)
     def get(self, request):
         user = self.request.user
         serializer = MainUserSerializer(user)

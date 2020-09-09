@@ -67,9 +67,6 @@ class BaseConfiguration(Configuration):
             },
         },
     ]
-    AUTHENTICATION_BACKENDS = [
-        'django.contrib.auth.backends.RemoteUserBackend',
-    ]
     WSGI_APPLICATION = 'camunda.wsgi.application'
 
 
@@ -135,7 +132,7 @@ class BaseConfiguration(Configuration):
     }
 
     SIMPLE_JWT = {
-        'ACCESS_TOKEN_LIFETIME': timedelta(seconds=5),
+        'ACCESS_TOKEN_LIFETIME': timedelta(seconds=300),
         'REFRESH_TOKEN_LIFETIME': timedelta(seconds=12000),
     }
     CORS_ORIGIN_ALLOW_ALL = True
