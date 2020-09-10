@@ -3,10 +3,11 @@ from auth_.models import *
 
 
 class Task(models.Model):
+    id = models.CharField(primary_key=True, max_length=150)
+    
     name = models.CharField(max_length=50)
-    user_id = models.ForeignKey(MainUser, on_delete=models.CASCADE)
-    process_id = models.IntegerField()
-    # Process Variable =
+    assignee = models.ForeignKey(MainUser, on_delete=models.CASCADE)
+    process_id = models.CharField(max_length=150)
 	# Task Variable =
 	# Case Variable =
 	# Process Instance ID =
@@ -26,7 +27,7 @@ class Task(models.Model):
 	# Candidate Group =
 	# Candidate User =
 	# Involved User =
-	# Task Definition Key =
+	# taskDefinitionKey =
 	# Name =
 	# Description =
 	# Priority =
