@@ -28,9 +28,11 @@ class RegistrationSerializer(serializers.Serializer):
     fio = serializers.CharField()
 
     def save(self):
+        camunda_id=self.validated_data['email'].partition('@')[0]
         MainUser.objects.create_user(self.validated_data['email'],
                                      self.validated_data['password'],
-                                     self.validated_data['fio'])
+                                     self.validated_data['fio'],
+                                     camunda_id)
 
 
 class ChangePasswordSerializer(serializers.Serializer):

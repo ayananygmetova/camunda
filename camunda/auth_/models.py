@@ -17,11 +17,11 @@ ROLES = (
 
 
 class MainUserManager(BaseUserManager):
-    def create_user(self, email, password, fio=None, phone=None, image_url=None, image_url_orig=None):
+    def create_user(self, email, password, fio=None, camunda_id=None, phone=None, image_url=None, image_url_orig=None):
         if not email:
             raise ValueError('User must have a email')
         email = self.normalize_email(email)
-        user = self.model(email=email, fio=fio,phone=phone, image_url= image_url, image_url_orig=image_url_orig)
+        user = self.model(email=email, fio=fio, camunda_id=camunda_id, phone=phone, image_url= image_url, image_url_orig=image_url_orig)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -29,6 +29,7 @@ class MainUserManager(BaseUserManager):
 
 
 class MainUser(AbstractBaseUser, PermissionsMixin):
+    camunda_id = models.CharField(max_length=160, null=True, blank=True)
     email = models.EmailField(max_length=100, unique=True, db_index=True, verbose_name='email сотрудника')
     fio = models.CharField(max_length=100, verbose_name='ФИО сотрудника')
     is_active = models.IntegerField(default=1, verbose_name='Признак активности. 0 - не активный, 1 - активный. По умолчанию 1')

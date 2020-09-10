@@ -30,8 +30,9 @@ class BaseConfiguration(Configuration):
         'rest_framework',
         'corsheaders',
         'utils',
-        'solo',
+        # 'solo',
         'auth_',
+        'task'
     ]
 
     MIDDLEWARE = [
@@ -122,12 +123,16 @@ class BaseConfiguration(Configuration):
 
     REST_FRAMEWORK = {
         'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+        # 'DEFAULT_PERMISSION_CLASSES': (
+        #     'rest_framework.permissions.IsAuthenticated',
+        # ),
         'DEFAULT_AUTHENTICATION_CLASSES': (
 
             'rest_framework_simplejwt.authentication.JWTAuthentication',
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.BasicAuthentication',
         ),
+        'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
         'EXCEPTION_HANDLER': 'utils.exceptions.custom_exception_handler',
     }
 
