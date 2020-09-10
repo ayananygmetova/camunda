@@ -1,17 +1,13 @@
-
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from utils.messages import (PASSWORD_CHANGED,
-                            USER_DETAILS_CHANGED,
-                            ACCOUNT_EXIST)
+                            USER_DETAILS_CHANGED)
 from utils.exceptions import CommonException
 from django.utils.translation import gettext
 from datetime import datetime
 import requests
 from rest_framework.permissions import IsAuthenticated
-import json
-import random
 from utils import messages, codes
 from auth_.token import get_token
 from auth_.models import MainUser
@@ -84,6 +80,7 @@ class UserInfo(APIView):
         serializer = MainUserSerializer(user)
         return Response(serializer.data)
 
+
 class ChangePassword(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer
 
@@ -98,7 +95,7 @@ class ChangePassword(generics.UpdateAPIView):
 
 class ChangeDetails(generics.UpdateAPIView):
     serializer_class = ChangeDetailsSerializer
-    queryset = MainUser
+    queryset = MainUser.objects.all()
 
     def put(self, request):
         serializer = ChangeDetailsSerializer(data=request.data,
@@ -112,7 +109,7 @@ class ChangeDetails(generics.UpdateAPIView):
 
     def patch(self, request):
         serializer = ChangeDetailsSerializer(data=request.data,
-                                             context={'request': self.request})
+                                             context={'request': self.request}, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.change_details()
         user = MainUserSerializer(self.request.user)

@@ -15,6 +15,8 @@ from task.serializers import TaskSerializer
 class Tasks(generics.ListCreateAPIView):
     # queryset = Task.objects.all()
     # permission_classes = (IsAuthenticated,)
+    serializer_class = TaskSerializer
+
     def get_queryset(self):
         serializer_class = TaskSerializer
         serializer_class.is_valid()

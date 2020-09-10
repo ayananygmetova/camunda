@@ -135,7 +135,9 @@ class BaseConfiguration(Configuration):
         'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
         'EXCEPTION_HANDLER': 'utils.exceptions.custom_exception_handler',
     }
-
+    AUTHENTICATION_BACKENDS = (
+        ('django.contrib.auth.backends.ModelBackend'),
+    )
     SIMPLE_JWT = {
         'ACCESS_TOKEN_LIFETIME': timedelta(seconds=300),
         'REFRESH_TOKEN_LIFETIME': timedelta(seconds=12000),

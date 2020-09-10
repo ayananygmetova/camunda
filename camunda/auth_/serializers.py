@@ -1,14 +1,9 @@
 from rest_framework import serializers
+from datetime import datetime
 
 from auth_.models import MainUser
-from auth_.token import get_token
 from utils.exceptions import CommonException
-from django.utils.translation import gettext
-from django.contrib.auth.hashers import make_password
 from utils import messages, codes
-
-from datetime import datetime
-from rest_framework_jwt.settings import api_settings
 
 
 class MainUserSerializer(serializers.ModelSerializer):
@@ -60,16 +55,30 @@ class ChangeDetailsSerializer(serializers.Serializer):
     phone = serializers.CharField()
 
     def validate(self, attrs):
-        if self.context['request'].user.email != attrs['email']:
-            if MainUser.objects.filter(email=attrs['email']).exists():
-                raise CommonException(detail=messages.ALREADY_EXIST,
-                                      code=codes.ALREADY_EXIST)
+        try:
+            attrs['email']
+        except:
+            return attrs
+        if attrs['email'] is not None:
+            if self.context['request'].user.email != attrs['email']:
+                if MainUser.objects.filter(email=attrs['email']).exists():
+                    raise CommonException(detail=messages.ALREADY_EXIST,
+                                          code=codes.ALREADY_EXIST)
         return attrs
 
     def change_details(self):
         user = self.context['request'].user
-        user.fio = self.validated_data['fio']
-        user.email = self.validated_data['email']
-        user.phone = self.validated_data['phone']
+        try:
+            user.fio = self.validated_data['fio']
+        except:
+            pass
+        try:
+            user.email = self.validated_data['email']
+        except:
+            pass
+        try:
+            user.phone = self.validated_data['phone']
+        except:
+            pass
         user.rowversion = datetime.now()
         user.save()
