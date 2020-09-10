@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="78d5be2e-12dd-4957-be68-81f6100532ac" name="Default Changelist" comment="Merge branch 'master' of https://github.com/cheesenology/sr_camunda into task&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="51e71cbee0ea36d6a6fa17849c9e22bd1fcedb0c" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JupyterTrust" id="db7133ad-409a-4282-896f-334a0ca1323d" />
+  <component name="ProjectId" id="1h0FmBiTO0HDUTFzKvDaVYtDAwa" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="redshift" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="camunda" type="Python.DjangoServer" factoryName="Django server">
+      <module name="camunda" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="78d5be2e-12dd-4957-be68-81f6100532ac" name="Default Changelist" comment="" />
+      <created>1599140258990</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599140258990</updated>
+      <workItem from="1599140260097" duration="13408000" />
+      <workItem from="1599160274568" duration="612000" />
+      <workItem from="1599161604508" duration="776000" />
+      <workItem from="1599164767776" duration="3638000" />
+      <workItem from="1599370067513" duration="7569000" />
+      <workItem from="1599451340760" duration="24830000" />
+      <workItem from="1599569573252" duration="11204000" />
+      <workItem from="1599652458132" duration="477000" />
+      <workItem from="1599712436940" duration="14408000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="348" y="188" key="#Notifications" timestamp="1599761232292">
+      <screen x="0" y="23" width="1280" height="703" />
+    </state>
+    <state x="348" y="188" key="#Notifications/0.23.1280.703@0.23.1280.703" timestamp="1599761232292" />
+    <state x="95" y="23" width="1071" height="709" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599373838588">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="95" y="23" width="1071" height="709" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1280.709@0.23.1280.709" timestamp="1599373838588" />
+    <state x="95" y="23" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1280.710@0.23.1280.710" timestamp="1599151332324" />
+    <state x="375" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599159992962">
+      <screen x="0" y="23" width="1280" height="710" />
+    </state>
+    <state x="375" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.710@0.23.1280.710" timestamp="1599159992962" />
+    <state x="369" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599146971308">
+      <screen x="0" y="23" width="1280" height="713" />
+    </state>
+    <state x="369" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1280.713@0.23.1280.713" timestamp="1599146971308" />
+    <state x="167" y="190" width="927" height="335" key="#com.intellij.structuralsearch.plugin.ui.StructuralSearchDialog" timestamp="1599482995563">
+      <screen x="0" y="23" width="1280" height="706" />
+    </state>
+    <state x="167" y="190" width="927" height="335" key="#com.intellij.structuralsearch.plugin.ui.StructuralSearchDialog/0.23.1280.706@0.23.1280.706" timestamp="1599482995563" />
+    <state x="118" y="23" key="CommitChangelistDialog2" timestamp="1599764596498">
+      <screen x="0" y="23" width="1280" height="701" />
+    </state>
+    <state x="118" y="23" key="CommitChangelistDialog2/0.23.1280.701@0.23.1280.701" timestamp="1599764596498" />
+    <state x="101" y="123" width="1060" height="469" key="DiffContextDialog" timestamp="1599764461031">
+      <screen x="0" y="23" width="1280" height="701" />
+    </state>
+    <state x="101" y="123" key="DiffContextDialog/0.23.1280.701@0.23.1280.701" timestamp="1599764461031" />
+    <state x="101" y="123" width="1060" height="469" key="DiffContextDialog/0.23.1280.703@0.23.1280.703" timestamp="1599761555914" />
+    <state x="490" y="115" key="EnvironmentVariablesDialog" timestamp="1599142662262">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="490" y="115" key="EnvironmentVariablesDialog/0.23.1280.709@0.23.1280.709" timestamp="1599142662262" />
+    <state x="419" y="138" key="FileChooserDialogImpl" timestamp="1599476611107">
+      <screen x="0" y="23" width="1280" height="705" />
+    </state>
+    <state x="419" y="138" key="FileChooserDialogImpl/0.23.1280.705@0.23.1280.705" timestamp="1599476611107" />
+    <state x="419" y="139" key="FileChooserDialogImpl/0.23.1280.709@0.23.1280.709" timestamp="1599142748200" />
+    <state width="233" height="457" key="HiddenNamespacesPopup" timestamp="1599151341160">
+      <screen x="0" y="23" width="1280" height="710" />
+    </state>
+    <state width="233" height="457" key="HiddenNamespacesPopup/0.23.1280.710@0.23.1280.710" timestamp="1599151341160" />
+    <state x="219" y="107" key="IDE.errors.dialog" timestamp="1599202976208">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="219" y="107" key="IDE.errors.dialog/0.23.1280.709@0.23.1280.709" timestamp="1599202976208" />
+    <state x="140" y="23" width="982" height="705" key="SettingsEditor" timestamp="1599715037065">
+      <screen x="0" y="23" width="1280" height="706" />
+    </state>
+    <state x="140" y="23" width="982" height="705" key="SettingsEditor/0.23.1280.705@0.23.1280.705" timestamp="1599477030815" />
+    <state x="140" y="23" key="SettingsEditor/0.23.1280.706@0.23.1280.706" timestamp="1599715037065" />
+    <state x="140" y="23" width="982" height="709" key="SettingsEditor/0.23.1280.709@0.23.1280.709" timestamp="1599381109375" />
+    <state x="101" y="123" width="1060" height="469" key="ShowDiffWithBranchDialog" timestamp="1599761555914">
+      <screen x="0" y="23" width="1280" height="703" />
+    </state>
+    <state x="101" y="123" width="1060" height="469" key="ShowDiffWithBranchDialog/0.23.1280.703@0.23.1280.703" timestamp="1599761555914" />
+    <state x="231" y="96" key="Vcs.Push.Dialog.v2" timestamp="1599765113846">
+      <screen x="0" y="23" width="1280" height="701" />
+    </state>
+    <state x="231" y="96" key="Vcs.Push.Dialog.v2/0.23.1280.701@0.23.1280.701" timestamp="1599765113846" />
+    <state x="231" y="96" key="Vcs.Push.Dialog.v2/0.23.1280.703@0.23.1280.703" timestamp="1599761252699" />
+    <state x="231" y="97" key="Vcs.Push.Dialog.v2/0.23.1280.708@0.23.1280.708" timestamp="1599716411378" />
+    <state x="433" y="275" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599764348914">
+      <screen x="0" y="23" width="1280" height="701" />
+    </state>
+    <state x="433" y="275" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.701@0.23.1280.701" timestamp="1599764348914" />
+    <state x="433" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.708@0.23.1280.708" timestamp="1599488264605" />
+    <state x="385" y="76" key="git4idea.branch.GitSmartOperationDialog" timestamp="1599765382300">
+      <screen x="0" y="23" width="1280" height="701" />
+    </state>
+    <state x="385" y="76" key="git4idea.branch.GitSmartOperationDialog/0.23.1280.701@0.23.1280.701" timestamp="1599765382300" />
+    <state x="385" y="77" key="git4idea.branch.GitSmartOperationDialog/0.23.1280.710@0.23.1280.710" timestamp="1599629806136" />
+    <state width="600" height="428" key="javadoc.popup" timestamp="1599466947628">
+      <screen x="0" y="23" width="1280" height="710" />
+    </state>
+    <state width="600" height="428" key="javadoc.popup/0.23.1280.710@0.23.1280.710" timestamp="1599466947628" />
+    <state x="296" y="53" width="670" height="676" key="search.everywhere.popup" timestamp="1599483013501">
+      <screen x="0" y="23" width="1280" height="706" />
+    </state>
+    <state x="296" y="53" width="670" height="676" key="search.everywhere.popup/0.23.1280.706@0.23.1280.706" timestamp="1599483013501" />
+  </component>
+</project>
